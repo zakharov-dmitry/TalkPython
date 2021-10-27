@@ -1,4 +1,8 @@
 fastapi
 uvicorn
-jinja2
 fastapi-chameleon
+aiofiles
+python-multipart
+sqlalchemy
+psycopg2
+python-dotenv
