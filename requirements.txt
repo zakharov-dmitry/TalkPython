@@ -6,3 +6,6 @@ python-multipart
 sqlalchemy
 psycopg2
 python-dotenv
+progressbar2
+python-dateutil
+passlib
