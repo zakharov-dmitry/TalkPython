@@ -1,5 +1,5 @@
 from typing import Optional
-
+from passlib.handlers.sha2_crypt import sha512_crypt as crypto
 from data import db_session
 from data.user import User
 
@@ -18,8 +18,7 @@ def create_user(name: str, email: str, password: str) -> User:
         user = User()
         user.email = email
         user.name = name
-        # TODO set proper password
-        user.hash_password = "TBD"
+        user.hash_password = crypto.hash(password, rounds=100_000)
         session.add(user)
         session.commit()
         return user
@@ -33,8 +32,7 @@ def login_user(email: str, password: str) -> Optional[User]:
         user = session.query(User).filter(User.email == email).first()
         if not user:
             return user
-        # TODO: Verify password
-        if False:
+        if not crypto.verify(password, user.hash_password):
             return None
         return user
     finally:
